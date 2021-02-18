@@ -6,16 +6,23 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 function BurgerBuilder(props) {
 
     const [ingredients, setIngredients] = useState({
-        salad: 1,
-        cheese: 1,
-        bacon: 1,
-        meat: 1
+        salad: 0,
+        cheese: 0,
+        bacon: 0,
+        meat: 0
     })
+
+    const addIngredientsHandler = (type) => {
+        const oldCount = ingredients[type];
+        const updatedCount = oldCount + 1;
+        ingredients[type] = updatedCount;
+        setIngredients ({...ingredients});
+    }
 
     return (
         <Auxil>
             <Burger ingredients = {ingredients}/>
-            <BuildControls/> 
+            <BuildControls ingredientAdded = {addIngredientsHandler}/> 
         </Auxil>
     )
 };
