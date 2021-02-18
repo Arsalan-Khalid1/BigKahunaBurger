@@ -1,5 +1,6 @@
 import React from 'react';
 import Auxil from '../../hoc/Auxil';
+import './Layout.css';
 
 function Layout(props) {
     return (
@@ -7,7 +8,7 @@ function Layout(props) {
             <div>
             Toolbar, SideDrawer, Backdrop
         </div>
-        <main>
+        <main className="Content">
             {props.children}
         </main>
         </Auxil>
