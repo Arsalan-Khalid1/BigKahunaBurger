@@ -1,7 +1,6 @@
 import React from 'react';
 import './BurgerIngredients.css';
 import PropTypes from 'prop-types';
-import BurgerBuilder from '../../../containers/BurgerBuilder/BurgerBuilder';
 
 function BurgerIngredients(props) {
 
