@@ -1,13 +1,6 @@
 import React from 'react';
 import './BuildControl.css';
 
-const controls = [
-    {label: "Salad" , type: "salad"},
-    {label: "Cheese" , type: "cheese"},
-    {label: "Bacon" , type: "bacon"},
-    {label: "Meat" , type: "meat"},
-];
-
 const BuildControl = (props) => {
     return (
         <div className = "BuildControl">
