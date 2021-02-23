@@ -6,7 +6,7 @@ function Layout(props) {
     return (
         <Auxil>
             <div>
-            Toolbar, SideDrawer, Backdrop
+            {/* Toolbar, SideDrawer, Backdrop */}
         </div>
         <main className="Content">
             {props.children}

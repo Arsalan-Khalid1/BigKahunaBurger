@@ -12,7 +12,7 @@ function BurgerBuilder(props) {
         meat: 1.5
     };
 
-    let [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(0);
 
     const [ingredients, setIngredients] = useState({
         salad: 0,
@@ -21,14 +21,25 @@ function BurgerBuilder(props) {
         meat: 0
     });
 
+    const [purchaseable, setPurchaseable] = useState(false);
+
+    const updatePurchaseable = (ingredient) => {
+        const sum = Object.keys(ingredient).map(igKey => {
+            return ingredient[igKey];
+        }).reduce((sum, el) => {
+            return sum + el;
+        }, 0);
+        setPurchaseable(sum > 0);
+    };
+
     const addIngredientsHandler = (type) => {
         const oldCount = ingredients[type];
         const updatedCount = oldCount + 1;
         ingredients[type] = updatedCount;
         const addedPrice = INGREDIENT_PRICES[type];
-        price = price + addedPrice;
-        setPrice(price);
+        setPrice(price + addedPrice);
         setIngredients ({...ingredients});
+        updatePurchaseable(ingredients);
     };
 
     const removedIngredientsHandler = (type) => {
@@ -38,10 +49,10 @@ function BurgerBuilder(props) {
         }
         const updatedCount = oldCount - 1;
         ingredients[type] = updatedCount;
-        const reducedPrice = INGREDIENT_PRICES[type];
-        price = price - reducedPrice;
-        setPrice(price);
+        const addedPrice = INGREDIENT_PRICES[type];
+        setPrice(price - addedPrice);
         setIngredients ({...ingredients});
+        updatePurchaseable(ingredients);
     };
 
     
@@ -58,6 +69,7 @@ function BurgerBuilder(props) {
             ingredientRemoved = {removedIngredientsHandler}
             price = {price}
             disabled = {disabledInfo}
+            pdisabled = {purchaseable}
             /> 
         </Auxil>
     );
