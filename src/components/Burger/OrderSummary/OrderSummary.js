@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import Auxil from '../../../hoc/Auxil';
 import Button from '../../UI/Button/Button';
 
@@ -8,6 +8,7 @@ const OrderSummary = (props) => {
                                         return (<li key={igKey}><span style={{textTransform:"capitalize"}}>{igKey}</span>: {props.ingredients[igKey]}</li>);
                                     });
 
+
     return (
         <Auxil>
             <h3>Your Order</h3>
@@ -15,7 +16,7 @@ const OrderSummary = (props) => {
             <ul>
                 {ingredientSummary}
             </ul>
-            <p><strong>Total Price : </strong>{props.price}</p>
+            <p><strong>Total Price : </strong>{props.price.toFixed(2)}</p>
             <Button btnType="Danger" clicked={props.purchaseCancel}>Cancel</Button>
             <Button btnType="Success" clicked={props.purchaseContinue}>Check Out</Button>
         </Auxil>

@@ -4,6 +4,7 @@ import Auxil from '../../../hoc/Auxil';
 import BackDrop from '../BackDrop/BackDrop';
 
 const Modal= (props) => {
+
     return (
         <Auxil>
             <BackDrop show={props.show} cancel={props.modalClosed}/>
