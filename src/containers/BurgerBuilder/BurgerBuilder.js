@@ -6,6 +6,7 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Modal from '../../components/UI/Modal/Modal';
 import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 
 function BurgerBuilder(props) {
@@ -133,4 +134,4 @@ function BurgerBuilder(props) {
     );
 };
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);
