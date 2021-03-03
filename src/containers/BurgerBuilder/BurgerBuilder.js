@@ -4,6 +4,8 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Modal from '../../components/UI/Modal/Modal';
+import axios from '../../axios-orders';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 
 function BurgerBuilder(props) {
@@ -16,7 +18,7 @@ function BurgerBuilder(props) {
     };
 
     const [purchase, setPurchase] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     const [price, setPrice] = useState(0);
 
     const [ingredients, setIngredients] = useState({
@@ -68,8 +70,34 @@ function BurgerBuilder(props) {
         setPurchase(false);
     };
 
-    const purchaseContinueHandler = () => {
-        alert('You bought a meal');
+     const purchaseContinueHandler = async () => {
+        setLoading(true);
+        const order = {
+            Ingredients : ingredients,
+            Price : price,
+            Customer : {
+                Name : "Arsalan Khalid",
+                Address : {
+                    Street : "Grove St.",
+                    ZipCode : "54000",
+                    Country : "USA"
+                },
+                email : "arslankhalid889@gmail.com"
+            },
+            DeliveryMethod : "Uber Bike"
+        };
+
+        try {
+            const response = await axios.post('/orders.json', order);
+            console.log(response);
+            setLoading(false);
+            setPurchase(false);
+        }
+        catch(error) {
+            console.log(error);
+            setLoading(false);
+            setPurchase(false)
+        }
     };
 
     
@@ -78,14 +106,19 @@ function BurgerBuilder(props) {
         disabledInfo[key] = disabledInfo[key] <= 0;
     };
 
-    return (
-        <Auxil>
-            <Modal show={purchase} modalClosed={purchaseClose}>
-                <OrderSummary ingredients={ingredients} 
+    let orderSummary = <OrderSummary ingredients={ingredients} 
                     purchaseCancel = {purchaseClose}
                     purchaseContinue = {purchaseContinueHandler}
                     price = {price}
-                />
+                />;
+    if(loading){
+        orderSummary = <Spinner/>;
+    }
+
+    return (
+        <Auxil>
+            <Modal show={purchase} modalClosed={purchaseClose}>
+                {orderSummary}
             </Modal>
             <Burger ingredients = {ingredients}/>
             <BuildControls 

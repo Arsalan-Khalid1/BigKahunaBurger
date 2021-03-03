@@ -6,7 +6,7 @@ import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 function Layout(props) {
 
-    const [drawer, setDrawer] = useState(true);
+    const [drawer, setDrawer] = useState();
 
     const closeDrawerHandler = () => {
         setDrawer(false);
